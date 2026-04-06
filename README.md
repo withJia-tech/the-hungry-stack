@@ -6,19 +6,19 @@ The point is not to build a restaurant. The point is to understand the stack so 
 
 ## The exercises
 
-Each one is small enough to finish before lunch.
+Each one is small enough to finish before lunch/recess time. :) Hopefully. You can time yourself.
 
 **Spring Boot — `menu-api/`**
-Build a `/menu` endpoint. Hit it in your browser, it returns the 5 dishes from `data/dishes.json` as JSON. That's it. Your first API.
+Build a `/menu` endpoint. Hit it in your browser, it returns the 5 dishes from `data/dishes.json` as JSON. That's it. _Your first API._
 
 **Redis — `daily-special/`**
-Store today's "dish of the day" in Redis. Retrieve it. Change it. Watch it disappear when it expires. Expiry is the lesson.
+Store today's "dish of the day" in Redis. Retrieve it. Change it. Watch it disappear when it expires. _Expiry is the lesson._
 
 **RabbitMQ — `order-queue/`**
-One service shouts an order ("laksa, table 4"). Another service listens and prints "order received." Two separate programs talking through a queue.
+One service shouts an order ("laksa, table 4"). Another service listens and prints "order received." Two _separate_ programs _talking through a queue_. Echoing the instruction. 
 
 **Cucumber — `kitchen-tests/`**
-Write a test in plain English: "Given the menu exists, when I ask for laksa, then I should get a price." Then make it pass.
+Write a test in plain English: "Given the menu exists, when I ask for laksa, then I should get a price." Then make it _pass._ If you want to up the difficulty level, write a test where the different variations exist e.g. with or without curry leaves, with or without sea hums. 
 
 **Docker**
 Put your Spring Boot menu API in a lunchbox. Run it on your machine without installing Java globally. The lunchbox contains everything.
