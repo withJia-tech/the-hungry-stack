@@ -1,0 +1,19 @@
+# order-queue — RabbitMQ
+
+## The exercise
+Two programs. They never call each other directly. They just shout into and listen to a queue.
+
+- **Program A (the waiter):** sends `"laksa, table 4"` into a queue called `orders`.
+- **Program B (the kitchen):** listens to `orders`. When it hears something, it prints `"order received: laksa, table 4"`.
+
+## The lesson
+The waiter doesn't need to know if the kitchen is busy, slow, or even running. The queue holds the message until someone is ready. That's the whole magic.
+
+## You'll know it works when
+You can start the kitchen first, then the waiter, and the order shows up.
+You can also start the waiter first, then the kitchen later — and the order is still waiting.
+
+## Reflection (fill in after)
+What surprised me:
+What confused me:
+What I want to try next:
