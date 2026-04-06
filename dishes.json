@@ -1,0 +1,35 @@
+[
+  {
+    "id": 1,
+    "name": "balado bakso",
+    "origin_language": "Indonesian (Minangkabau / Hokkien fusion)",
+    "origin_region": "Indonesia",
+    "curator_note": "A meeting point between Minangkabau chilli heat and Hokkien meatball tradition. The Hokkien bakso (bak = meat, so = ball) travelled with Chinese migrants and became something entirely Indonesian. What we call bak chor mee in Singapore has a cousin here that went a different direction.",
+    "borrowed_by": ["Singaporean Hokkien (bak chor mee)", "Malaysian Chinese"],
+    "word_origin": "Hokkien: bak (肉, meat) + so (鬆, loose/minced)",
+    "contested": false,
+    "tags": ["hokkien", "indonesian", "diaspora", "meatball", "chilli"]
+  },
+  {
+    "id": 2,
+    "name": "nian gao",
+    "origin_language": "Mandarin Chinese",
+    "origin_region": "China",
+    "curator_note": "The translation 'glutinous rice cake' is technically accurate and completely misses the point. Nian gao (年糕) carries the homophone nian (年, year) and gao (高, tall/high) — the name IS the meaning. To translate it is to lose the entire reason people eat it at New Year. Some names should travel as themselves.",
+    "borrowed_by": ["Singaporean English", "Malaysian English", "Indonesian (dodol adjacent)"],
+    "word_origin": "Mandarin: 年 (nián, year) + 糕 (gāo, cake) — homophone with 年高, year-high, a prosperity wish",
+    "contested": false,
+    "tags": ["mandarin", "new-year", "untranslatable", "homophone", "chinese-diaspora"]
+  },
+  {
+    "id": 3,
+    "name": "chee cheong fun",
+    "origin_language": "Cantonese",
+    "origin_region": "Guangdong, China",
+    "curator_note": "Cheung fun (腸粉) in Cantonese literally means intestine noodle — named for the shape of the rolled rice sheet, not the contents. Singaporean Cantonese communities shortened and softened it into chee cheong fun. The Singaporean version diverged significantly — sweet sauce, prawn paste, hae bee hiam — while Hong Kong kept it minimal and steamed. Same name, different dish. That divergence is the story.",
+    "borrowed_by": ["Singaporean English", "Malaysian English"],
+    "word_origin": "Cantonese: 猪肠粉 (zhū cháng fěn) — pig intestine flour/noodle, named for shape",
+    "contested": false,
+    "tags": ["cantonese", "rice-noodle", "singaporean", "divergence", "dim-sum"]
+  }
+]
