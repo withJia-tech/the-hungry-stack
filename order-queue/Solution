@@ -1,0 +1,120 @@
+# order-queue — SOLUTION (RabbitMQ)
+
+Two tiny Python programs. Python because it's the shortest way to feel what a queue is — the lesson is about messages passing between two separate programs, not about Java setup.
+
+## Step 1 — Start RabbitMQ
+```
+docker run --rm -p 5672:5672 -p 15672:15672 rabbitmq:3-management
+```
+
+Leave that terminal alone. RabbitMQ is running.
+
+(Bonus: open http://localhost:15672 in your browser, login `guest` / `guest`, and you can *see* the queue with your eyes. This is the best visual learning tool in the whole stack.)
+
+## Step 2 — Install the Python client
+In a second terminal:
+```
+pip install pika
+```
+
+## Step 3 — Write the waiter (sends orders)
+Create a file called `waiter.py`:
+
+```python
+import pika
+
+# Connect to RabbitMQ
+connection = pika.BlockingConnection(pika.ConnectionParameters('localhost'))
+channel = connection.channel()
+
+# Make sure a queue called 'orders' exists
+channel.queue_declare(queue='orders')
+
+# Shout the order into the queue
+channel.basic_publish(
+    exchange='',
+    routing_key='orders',
+    body='laksa, table 4'
+)
+
+print("waiter: sent 'laksa, table 4'")
+connection.close()
+```
+
+## Step 4 — Write the kitchen (listens for orders)
+Create a file called `kitchen.py`:
+
+```python
+import pika
+
+connection = pika.BlockingConnection(pika.ConnectionParameters('localhost'))
+channel = connection.channel()
+
+channel.queue_declare(queue='orders')
+
+def on_order(ch, method, properties, body):
+    print(f"kitchen: order received -> {body.decode()}")
+
+channel.basic_consume(
+    queue='orders',
+    on_message_callback=on_order,
+    auto_ack=True
+)
+
+print("kitchen: waiting for orders. press Ctrl+C to stop.")
+channel.start_consuming()
+```
+
+## Step 5 — Run them
+Open **two more terminals**.
+
+**Terminal A — start the kitchen first:**
+```
+python kitchen.py
+```
+It sits there, waiting.
+
+**Terminal B — run the waiter:**
+```
+python waiter.py
+```
+It prints `waiter: sent 'laksa, table 4'` and exits.
+
+Look at Terminal A. It now says:
+```
+kitchen: order received -> laksa, table 4
+```
+
+**The two programs never spoke to each other.** The waiter didn't know the kitchen existed. The kitchen didn't know the waiter existed. They both just knew about a queue called `orders`.
+
+## Now do the cooler thing
+Stop the kitchen (Ctrl+C in Terminal A). Don't restart it yet.
+
+Run the waiter **three times**:
+```
+python waiter.py
+python waiter.py
+python waiter.py
+```
+
+Three orders are now sitting in the queue, waiting.
+
+**Now** start the kitchen:
+```
+python kitchen.py
+```
+
+Watch it immediately print all three orders, one after another. RabbitMQ held onto them for you while no one was listening. That's the whole magic.
+
+## The lesson, said plainly
+A queue is a **shared list that one program writes to and another program reads from**. They don't have to be running at the same time. They don't have to know about each other. They just both know the name of the queue.
+
+In real life: this is why you can text someone at 2am and they can read it in the morning. The text message is sitting in a queue, waiting.
+
+## To stop everything
+- Kitchen: Ctrl+C in its terminal.
+- RabbitMQ server: Ctrl+C in the first terminal.
+
+## If something broke
+- **`ConnectionRefusedError`** → RabbitMQ isn't running. Go back to Step 1.
+- **`ModuleNotFoundError: pika`** → you didn't run `pip install pika`.
